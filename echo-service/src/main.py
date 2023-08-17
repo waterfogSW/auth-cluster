@@ -1,13 +1,10 @@
-from fastapi import FastAPI
+from typing import Optional
+
+from fastapi import FastAPI, Header
 
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+@app.get("/echo_user_info")
+async def echo_user_info(username: Optional[str] = Header(None)):
+    return {"username": username}

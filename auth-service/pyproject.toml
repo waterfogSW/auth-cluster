@@ -3,13 +3,14 @@ name = "auth-service"
 version = "0.1.0"
 description = ""
 authors = ["San Kim <waterfog9580@gmail.com>"]
-readme = "README.md"
-packages = [{include = "auth_service"}]
+packages = [{ from = "src", include = "*" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = "^0.101.1"
 uvicorn = "^0.23.2"
+
+
 
 
 [build-system]
