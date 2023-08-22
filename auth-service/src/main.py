@@ -1,8 +1,8 @@
 import time
 
 from fastapi import FastAPI
-from jose import jwt, jwk
 from pydantic import BaseModel
+from jose import jwk, jwt
 
 app = FastAPI()
 
