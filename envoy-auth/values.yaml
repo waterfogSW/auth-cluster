@@ -1,9 +1,10 @@
+namespace: envoy-auth
 auth_service:
   name: auth-service
   namespace: envoy-auth
   deployment:
     replicas: 1
-    image: waterfogsw/auth-server:1.0.0
+    image: waterfogsw/auth-server:1.0.1
     container_port: 8000
   service:
     port: 8000

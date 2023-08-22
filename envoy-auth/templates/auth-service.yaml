@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.auth_service.name }}
+  namespace: {{ .Values.auth_service.namespace }}
 spec:
   replicas: {{ .Values.auth_service.deployment.replicas }}
   selector:
@@ -22,6 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.auth_service.name }}
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     app: {{ .Values.auth_service.name }}
