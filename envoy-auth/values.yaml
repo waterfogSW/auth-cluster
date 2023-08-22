@@ -1,0 +1,19 @@
+auth_service:
+  name: auth-service
+  namespace: envoy-auth
+  deployment:
+    replicas: 1
+    image: waterfogsw/auth-server:1.0.0
+    container_port: 8000
+  service:
+    port: 8000
+
+echo_service:
+  name: echo-service
+  namespace: envoy-auth
+  deployment:
+    replicas: 1
+    image: waterfogsw/echo-server:1.0.0
+    container_port: 8000
+  service:
+    port: 8001

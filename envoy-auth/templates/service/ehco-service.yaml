@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.echo_service.name }}
+spec:
+  replicas: {{ .Values.echo_service.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.echo_service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.echo_service.name }}
+    spec:
+      containers:
+        - name: {{ .Values.echo_service.name }}
+          image: {{ .Values.echo_service.deployment.image }}
+          ports:
+            - containerPort: {{ .Values.echo_service.deployment.container_port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.echo_service.name }}
+spec:
+  selector:
+    app: {{ .Values.echo_service.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.echo_service.service.port }}
+      targetPort: {{ .Values.echo_service.deployment.container_port }}

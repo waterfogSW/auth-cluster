@@ -1,0 +1,6 @@
+apiVersion: v2
+name: envoy-auth
+description: Helm chart for deploying a JWT-authenticated application with Istio and Envoy
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
