@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .Values.project_name }}-virtual-service
+  namespace: {{ .Values.project_name }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - {{ .Values.project_name }}-gateway
+  http:
+    - name: {{ .Values.auth_service.name }}
+      match:
+        - uri:
+            prefix: {{ .Values.auth_service.gateway.uri_prefix }}
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: {{ .Values.auth_service.name }}
+            port:
+              number: {{ .Values.auth_service.service.port }}
+    - name: {{ .Values.echo_service.name }}
+      match:
+        - uri:
+            prefix: {{ .Values.echo_service.gateway.uri_prefix }}
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: {{ .Values.echo_service.name }}
+            port:
+              number: {{ .Values.echo_service.service.port }}
