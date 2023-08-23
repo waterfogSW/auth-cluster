@@ -1,7 +1,10 @@
+project_name: envoy-auth
 namespace: envoy-auth
 auth_service:
   name: auth-service
   namespace: envoy-auth
+  gateway:
+    uri_prefix: /api/auth/
   deployment:
     replicas: 1
     image: waterfogsw/auth-server:1.0.1
@@ -12,6 +15,8 @@ auth_service:
 echo_service:
   name: echo-service
   namespace: envoy-auth
+  gateway:
+    uri_prefix: /api/echo/
   deployment:
     replicas: 1
     image: waterfogsw/echo-server:1.0.0
