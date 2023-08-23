@@ -17,4 +17,4 @@ echo_service:
     image: waterfogsw/echo-server:1.0.0
     container_port: 8000
   service:
-    port: 8001
+    port: 8000
