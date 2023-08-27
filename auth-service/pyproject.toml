@@ -9,9 +9,8 @@ packages = [{ from = "src", include = "*" }]
 python = "^3.11"
 fastapi = "^0.101.1"
 uvicorn = "^0.23.2"
+cryptography = "^41.0.3"
 python-jose = "^3.3.0"
-
-
 
 
 [build-system]
