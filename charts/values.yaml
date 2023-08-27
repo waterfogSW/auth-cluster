@@ -7,7 +7,7 @@ auth_service:
     uri_prefix: /api/auth/
   deployment:
     replicas: 1
-    image: waterfogsw/auth-server:1.0.1
+    image: waterfogsw/auth-server:1.0.3
     container_port: 8000
   service:
     port: 8000
