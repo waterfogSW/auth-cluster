@@ -1,0 +1,43 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: jwt-token-filter
+  namespace: istio-system
+spec:
+  workloadSelector:
+    labels:
+      istio: ingressgateway
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: GATEWAY
+        listener:
+          filterChain:
+            filter:
+              name: "envoy.filters.network.http_connection_manager"
+              subFilter:
+                name: "envoy.filters.http.router"
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          name: "envoy.filters.http.jwt_authn"
+          typed_config:
+            "@type": "type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication"
+            rules:
+              - match:
+                    prefix: "/api/auth/login"
+              - match:
+                  prefix: "/"
+                requires:
+                  providerName: auth_service
+            providers:
+              auth_service:
+                remote_jwks:
+                  http_uri:
+                    uri: {{ .Values.jwt.jwks_endpoint }}
+                    cluster: "outbound|{{ .Values.auth_service.service.port }}||{{ .Values.auth_service.name }}.{{ .Values.namespace }}.svc.cluster.local"
+                    timeout: 2s
+                  cache_duration: 300s
+                claim_to_headers:
+                  - header_name: username
+                    claim_name: username
