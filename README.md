@@ -3,6 +3,8 @@
 This project demonstrates the application of an Istio Envoy filter in a Kubernetes cluster. 
 It intercepts JWTs (JSON Web Tokens), parses them to extract a 'username' claim, and passes it in the headers to downstream services.
 
+![architecture.png](architecture.png)
+
 ## Pre-requisites
 
 - Kubernetes (e.g., Minikube for a local setup), with Istio installed.
